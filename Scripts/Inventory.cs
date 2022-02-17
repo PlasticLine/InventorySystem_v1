@@ -23,9 +23,20 @@ public class Inventory : MonoBehaviour
     private void InitCell()
     {
         _data = new ItemCell[Weight, Height];
+        
+        Camera cameraMain = Camera.main;
+        float flak = cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(2, 1))).x - cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(1, 1))).x;
+        flak -= 3;
+
         for (int y = 0; y < Height; y++)
         for (int x = 0; x < Weight; x++)
-            _data[x, y] = Instantiate(_itemCellPrefab, GetWorldPosition(new Vector3(x, y)), Quaternion.identity, transform);
+        {
+            Vector2 position = GetWorldPosition(new Vector3(x, y));
+            ItemCell itemCell = Instantiate(_itemCellPrefab, position, Quaternion.identity, transform);
+            RectTransform itemCellRect = itemCell.GetComponent<RectTransform>();
+            itemCellRect.sizeDelta = new Vector2(flak, flak);
+            _data[x, y] = itemCell;
+        }
     }
     
     #endregion
@@ -122,7 +133,14 @@ public class Inventory : MonoBehaviour
     
     #endregion
 
-    #region VisualDebug
+    #region OtherFunctions
+
+    private Vector2 GetWorldPosition(Vector2 gridPosition)
+        => (Vector2) transform.position + new Vector2(gridPosition.x, gridPosition.y);
+
+    #endregion
+    
+    #region Visual
 
     #if UNITY_EDITOR
         private void OnDrawGizmos()
@@ -132,9 +150,6 @@ public class Inventory : MonoBehaviour
                 Gizmos.DrawWireCube(GetWorldPosition(new Vector2(x, y)), Vector3.one);
         }
     #endif
-    
-    private Vector2 GetWorldPosition(Vector2 gridPosition)
-        => (Vector2) transform.position + new Vector2(gridPosition.x, gridPosition.y);
 
     #endregion
     

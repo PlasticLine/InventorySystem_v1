@@ -69,7 +69,7 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
                 {
                     if (target_cell.Item)
                     {
-                        if (target_cell.Item.TAG == Item.TAG && target_cell.Count+1 <= target_cell.Item.Stack)
+                        if (target_cell.Item.TAG == Item.TAG && target_cell.Count + 1 <= target_cell.Item.Stack)
                         {
                             target_cell.SetCount(target_cell.Count + 1);
                             SetCount(Count - 1);
@@ -83,11 +83,12 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
                 }
                 else // Move all item
                 {
-                    if(target_cell.Item && target_cell.Item.TAG == Item.TAG && target_cell.Count < target_cell.Item.Stack)
+                    if (target_cell.Item && target_cell.Item.TAG == Item.TAG &&
+                        target_cell.Count < target_cell.Item.Stack)
                     {
                         if (target_cell.Count + Count <= target_cell.Item.Stack)
                         {
-                            target_cell.SetCount(target_cell.Count+Count);
+                            target_cell.SetCount(target_cell.Count + Count);
                             DeleteItem();
                         }
                         else
@@ -95,8 +96,8 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
                             int lack = target_cell.Item.Stack - target_cell.Count;
                             if (lack > 0 && Count >= lack)
                             {
-                                target_cell.SetCount(target_cell.Count+lack);
-                                SetCount(Count-lack);
+                                target_cell.SetCount(target_cell.Count + lack);
+                                SetCount(Count - lack);
                             }
                         }
                     }
@@ -108,10 +109,8 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
                 }
 
                 target_cell.ReloadVisual();
-                ReloadVisual();
             }
         }
-        
         
         _icon.transform.SetParent(transform);
         _icon.transform.position = transform.position;

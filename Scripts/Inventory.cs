@@ -11,30 +11,33 @@ public class Inventory : MonoBehaviour
     [Min(1)] public int Height = 1;
     [SerializeField] private ItemCell _itemCellPrefab;
 
-    [HideInInspector] public UnityEvent OnChangeItems;
+    [Header("Size cell")] 
+    [SerializeField, Min(0)] private float _indent = 3;
     
+    [HideInInspector] public UnityEvent OnChangeItems;
+
+    private Camera _cameraMain;
     private ItemCell[,] _data;
     
     #region Main
 
     private void Awake()
-        => InitCell();
- 
+    {
+        _cameraMain = Camera.main;
+        InitCell();
+    }
+
     private void InitCell()
     {
         _data = new ItemCell[Weight, Height];
-        
-        Camera cameraMain = Camera.main;
-        float flak = cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(2, 1))).x - cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(1, 1))).x;
-        flak -= 3;
+        float sizeCell = GetSizeCell();
 
         for (int y = 0; y < Height; y++)
         for (int x = 0; x < Weight; x++)
         {
             Vector2 position = GetWorldPosition(new Vector3(x, y));
             ItemCell itemCell = Instantiate(_itemCellPrefab, position, Quaternion.identity, transform);
-            RectTransform itemCellRect = itemCell.GetComponent<RectTransform>();
-            itemCellRect.sizeDelta = new Vector2(flak, flak);
+            itemCell.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeCell, sizeCell);
             _data[x, y] = itemCell;
         }
     }
@@ -151,6 +154,10 @@ public class Inventory : MonoBehaviour
         }
     #endif
 
+    private float GetSizeCell()
+        => (_cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(2, 1))).x - 
+            _cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(1, 1))).x) - _indent;
+    
     #endregion
     
 }

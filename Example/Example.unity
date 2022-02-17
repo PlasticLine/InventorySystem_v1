@@ -506,6 +506,7 @@ MonoBehaviour:
   Weight: 6
   Height: 1
   _itemCellPrefab: {fileID: 7859041202323356971, guid: 4e3ae66c77df478428f2ab663a12bbdc, type: 3}
+  _indent: 3
   OnChangeItems:
     m_PersistentCalls:
       m_Calls: []
@@ -562,6 +563,7 @@ MonoBehaviour:
   Weight: 6
   Height: 4
   _itemCellPrefab: {fileID: 7859041202323356971, guid: 4e3ae66c77df478428f2ab663a12bbdc, type: 3}
+  _indent: 3
   OnChangeItems:
     m_PersistentCalls:
       m_Calls: []

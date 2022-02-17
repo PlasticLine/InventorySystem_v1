@@ -134,8 +134,11 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        _dragImage = new GameObject("DRAG ICON", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
-        _dragImage.sprite = Item.Icon;
+        if (!_dragImage)
+        {
+            _dragImage = new GameObject("DRAG ICON", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
+            _dragImage.sprite = Item.Icon;
+        }
     }
     
     public void OnPointerEnter(PointerEventData eventData)

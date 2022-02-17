@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     [Min(1)] public int Height = 1;
     [SerializeField] private ItemCell _itemCellPrefab;
 
-    [Header("Size cell")] 
+    [Header("Size cell")] public bool IsBlock;
     [SerializeField, Min(0)] private float _indent = 3;
     
     [HideInInspector] public UnityEvent OnChangeItems;
@@ -38,6 +38,7 @@ public class Inventory : MonoBehaviour
             Vector2 position = GetWorldPosition(new Vector3(x, y));
             ItemCell itemCell = Instantiate(_itemCellPrefab, position, Quaternion.identity, transform);
             itemCell.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeCell, sizeCell);
+            itemCell.SetBlock(IsBlock);
             _data[x, y] = itemCell;
         }
     }

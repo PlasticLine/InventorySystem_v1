@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEnterHandler, IBeginDragHandler
 {
     [Header("Reference sprites")] 
+    [SerializeField] private GameObject _blockCellObject;
     [SerializeField] private Sprite _nullReferenceSprite;
     
     [Header("Reference")]
@@ -18,13 +19,20 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     [SerializeField] private GameObject _parentImageValue;
     [SerializeField] private TextMeshProUGUI _valueText;
     
-    public int Count;
+    [HideInInspector] public int Count;
     [HideInInspector] public Item Item;
+    [HideInInspector] public bool _isBlock;
 
+    private RectTransform _rectTransform;
+    private SpriteRenderer _dragImage;
+    
     #region Main
 
     private void Start()
-        => ReloadVisual();
+    {
+        _rectTransform = GetComponent<RectTransform>();
+        ReloadVisual();
+    }
 
     #endregion
 
@@ -40,6 +48,12 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     {
         Item = targetItem;
         Count = count;
+        ReloadVisual();
+    }
+    
+    public void SetBlock(bool flag)
+    {
+        _isBlock = flag;
         ReloadVisual();
     }
     
@@ -59,70 +73,70 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
 
-        foreach (var target in results)
-        {
-            if (target.gameObject.TryGetComponent(out ItemCell target_cell))
-            {
-
-                Item old_item = target_cell.Item;
-                int old_value = target_cell.Count;
-
-                if (Input.GetMouseButtonUp(1) && Count >= 2) // Move one item
+        if(!_isBlock)
+            foreach (var target in results)
+                if (target.gameObject.TryGetComponent(out ItemCell target_cell) && !target_cell._isBlock)
                 {
-                    if (target_cell.Item)
+                    Item old_item = target_cell.Item;
+                    int old_value = target_cell.Count;
+
+                    if (Input.GetMouseButtonUp(1) && Count >= 2) // Move one item
                     {
-                        if (target_cell.Item.TAG == Item.TAG && target_cell.Count + 1 <= target_cell.Item.Stack)
+                        if (target_cell.Item)
                         {
-                            target_cell.SetCount(target_cell.Count + 1);
-                            SetCount(Count - 1);
-                        }
-                    }
-                    else
-                    {
-                        target_cell.SetItem(Item);
-                        SetCount(Count - 1);
-                    }
-                }
-                else // Move all item
-                {
-                    if (target_cell.Item && target_cell.Item.TAG == Item.TAG &&
-                        target_cell.Count < target_cell.Item.Stack)
-                    {
-                        if (target_cell.Count + Count <= target_cell.Item.Stack)
-                        {
-                            target_cell.SetCount(target_cell.Count + Count);
-                            DeleteItem();
+                            if (target_cell.Item.TAG == Item.TAG && target_cell.Count + 1 <= target_cell.Item.Stack)
+                            {
+                                target_cell.SetCount(target_cell.Count + 1);
+                                SetCount(Count - 1);
+                            }
                         }
                         else
                         {
-                            int lack = target_cell.Item.Stack - target_cell.Count;
-                            if (lack > 0 && Count >= lack)
-                            {
-                                target_cell.SetCount(target_cell.Count + lack);
-                                SetCount(Count - lack);
-                            }
+                            target_cell.SetItem(Item);
+                            SetCount(Count - 1);
                         }
                     }
-                    else
+                    else // Move all item
                     {
-                        target_cell.SetItem(Item, Count);
-                        SetItem(old_item, old_value);
+                        if (target_cell.Item && target_cell.Item.TAG == Item.TAG &&
+                            target_cell.Count < target_cell.Item.Stack)
+                        {
+                            if (target_cell.Count + Count <= target_cell.Item.Stack)
+                            {
+                                target_cell.SetCount(target_cell.Count + Count);
+                                DeleteItem();
+                            }
+                            else
+                            {
+                                int lack = target_cell.Item.Stack - target_cell.Count;
+                                if (lack > 0 && Count >= lack)
+                                {
+                                    target_cell.SetCount(target_cell.Count + lack);
+                                    SetCount(Count - lack);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            target_cell.SetItem(Item, Count);
+                            SetItem(old_item, old_value);
+                        }
                     }
-                }
 
-                target_cell.ReloadVisual();
-            }
-        }
+                    target_cell.ReloadVisual();
+                }
         
-        _icon.transform.SetParent(transform);
-        _icon.transform.position = transform.position;
+        Destroy(_dragImage.gameObject);
     }
 
     public void OnDrag(PointerEventData eventData)
-        => _icon.transform.position = Camera.main.mousePosition();
+        => _dragImage.transform.position = Camera.main.mousePosition();
 
     public void OnBeginDrag(PointerEventData eventData)
-        => _icon.transform.SetParent(transform.parent.parent);
+    {
+        _dragImage = new GameObject("DRAG ICON", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
+        _dragImage.sprite = Item.Icon;
+    }
     
     public void OnPointerEnter(PointerEventData eventData)
         => _animator.Play("PointEnter");
@@ -133,6 +147,7 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
 
     public void ReloadVisual()
     {
+        _blockCellObject.SetActive(_isBlock);
         _icon.sprite = Item && Item.Icon ? Item.Icon : _nullReferenceSprite;
         _valueText.text = Count.ToString();
         _parentImageValue.SetActive(Count > 1);

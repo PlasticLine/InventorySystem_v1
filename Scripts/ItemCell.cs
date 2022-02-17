@@ -10,12 +10,14 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     [Header("Reference sprites")] 
     [SerializeField] private Sprite _nullReferenceSprite;
     
-    [Header("Reference")] 
-    [SerializeField] private TextMeshProUGUI _valueText;
+    [Header("Reference")]
     [SerializeField] private Image _icon;
     [SerializeField] private Animator _animator;
 
-
+    [Header("VALUE")]
+    [SerializeField] private GameObject _parentImageValue;
+    [SerializeField] private TextMeshProUGUI _valueText;
+    
     public int Count;
     [HideInInspector] public Item Item;
 
@@ -132,8 +134,9 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     public void ReloadVisual()
     {
         _icon.sprite = Item && Item.Icon ? Item.Icon : _nullReferenceSprite;
-        _valueText.text = Count <= 1  ? "" : Count.ToString();
-        
+        _valueText.text = Count.ToString();
+        _parentImageValue.SetActive(Count > 1);
+
         if(Count <= 0 && Item)
             DeleteItem();
     }

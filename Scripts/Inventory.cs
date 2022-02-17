@@ -79,7 +79,7 @@ public class Inventory : MonoBehaviour
         OnChangeItems.Invoke();
     }
     
-    private ItemCell GetNullCell()
+    public ItemCell GetNullCell()
     {
         for (int y = Height-1; y >= 0; y--)
         for (int x = 0; x < Weight; x++)
@@ -88,7 +88,7 @@ public class Inventory : MonoBehaviour
         return null;
     }
     
-    private List<ItemCell> FindItems(Item target)
+    public List<ItemCell> FindItems(Item target)
     {
         List<ItemCell> items = new List<ItemCell>();
         foreach (var item in _data)
@@ -97,6 +97,14 @@ public class Inventory : MonoBehaviour
         return items;
     }
 
+    public List<ItemCell> GetAllItems()
+    {
+        List<ItemCell> items = new List<ItemCell>();
+        foreach (var item in _data)
+            if (item.Item) items.Add(item);
+        return items;
+    }
+    
     public int GetCountItem(Item target)
     {
         int current_count = 0;

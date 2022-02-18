@@ -9,6 +9,7 @@ Inventory.GetNullCell(); // Найти свободную ячейку (return I
 Inventory.FindItems(Item targetItem); // Найти определенный предмет (return List<ItemCell>)
 Inventory.GetCountItem(Item targetItem); // Получить кол-во определенных предметов (return int)
 Inventory.GetAllItems(); // Получить все предметы которые лежат в инвенторе (return List<ItemCell>)
+Inventory.GetSizeGrid(); // Получить размер сетки (return Vector2Int) "x - weight y - height"
 ```
 
 ###### Функции у ItemCell.cs

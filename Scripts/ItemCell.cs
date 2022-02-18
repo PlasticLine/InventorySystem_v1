@@ -157,7 +157,7 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     {
         _blockCellObject.SetActive(_isBlock);
         _icon.sprite = Item && Item.Icon ? Item.Icon : _nullReferenceSprite;
-        _valueText.text = Count.ToString();
+        _valueText.text = $"x{Count.ToString()}";
         _parentImageValue.SetActive(Count > 1);
 
         if(Count <= 0 && Item)

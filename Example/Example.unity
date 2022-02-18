@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isField: 1
-  _isBlockRandom: 0
+  _isBlockRandom: 1
   _inventory: {fileID: 1052697349}
   _cellPrefab: {fileID: 0}
   _items:
@@ -535,6 +535,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e9328bf3dcb37c64597fff2c5c157f46, type: 2}
   - {fileID: 11400000, guid: a4634552699005c40832c5270fe432a8, type: 2}
   - {fileID: 11400000, guid: 95a02ec87f0254b498b50f5c5baee4ec, type: 2}
+  - {fileID: 11400000, guid: d737ec2107e1a094594f1557ce92780d, type: 2}
 --- !u!1 &1192293678
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +672,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e9328bf3dcb37c64597fff2c5c157f46, type: 2}
   - {fileID: 11400000, guid: a4634552699005c40832c5270fe432a8, type: 2}
   - {fileID: 11400000, guid: 95a02ec87f0254b498b50f5c5baee4ec, type: 2}
+  - {fileID: 11400000, guid: d737ec2107e1a094594f1557ce92780d, type: 2}
 --- !u!1 &1832729235
 GameObject:
   m_ObjectHideFlags: 0

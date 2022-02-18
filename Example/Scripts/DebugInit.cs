@@ -9,7 +9,6 @@ public class DebugInit : MonoBehaviour
     [SerializeField] private bool _isField;
     [SerializeField] private bool _isBlockRandom;
     [SerializeField] private Inventory _inventory;
-    [SerializeField] private ItemCell _cellPrefab;
     [SerializeField] private List<Item> _items = new List<Item>();
 
     private void Start()
@@ -40,7 +39,8 @@ public class DebugInit : MonoBehaviour
                 _inventory.AddItem(item, Random.Range(1, item.Stack+1));
                 if (Random.value < .5f && _isBlockRandom)
                 {
-                    Vector2Int index = new Vector2Int(Random.Range(0, _inventory.Weight), Random.Range(0, _inventory.Height));
+                    Vector2Int sizeGrid = _inventory.GetSzieGrid();
+                    Vector2Int index = new Vector2Int(Random.Range(0, sizeGrid.x), Random.Range(0, sizeGrid.y));
                     _inventory._data[index.x, index.y].SetBlock(true);
                 }
             }

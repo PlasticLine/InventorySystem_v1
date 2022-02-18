@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class DebugInit : MonoBehaviour
 {
+    [SerializeField] private bool _isRemove;
     [SerializeField] private bool _isField;
     [SerializeField] private bool _isBlockRandom;
     [SerializeField] private Inventory _inventory;
@@ -26,6 +27,13 @@ public class DebugInit : MonoBehaviour
             
             _inventory.Clear();
             Init();
+        }
+
+        if (Input.GetMouseButtonDown(4) && _isRemove)
+        {
+            Item item = _items.Random();
+            int countRemove = Random.Range(1, item.Stack + 1);
+            Debug.Log($"Remove: x{countRemove} {item.Title} | Status: {_inventory.RemoveItem(item, countRemove)}");
         }
     }
 

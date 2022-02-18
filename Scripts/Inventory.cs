@@ -53,23 +53,20 @@ public class Inventory : MonoBehaviour
             return false;
 
         int currentCount = count;
-        do
+        List<ItemCell> itemCells = FindItems(targetItem);
+        foreach (var itemCell in itemCells)
         {
-            List<ItemCell> itemCells = FindItems(targetItem);
-            foreach (var itemCell in itemCells)
+            if (itemCell.Count <= currentCount)
             {
-                if (itemCell.Count == targetItem.Stack && currentCount >= targetItem.Stack)
-                {
-                    itemCell.SetCount(0);
-                    currentCount -= targetItem.Stack;
-                }
-                else if (itemCell.Count == targetItem.Stack && currentCount < targetItem.Stack)
-                {
-                    itemCell.SetCount(itemCell.Count-currentCount);
-                    currentCount = 0;
-                }
+                currentCount -= itemCell.Count;
+                itemCell.SetCount(0);
             }
-        } while (currentCount > 0);
+            else if (itemCell.Count >= currentCount)
+            {
+                itemCell.SetCount(itemCell.Count - currentCount);
+                currentCount = 0;
+            }
+        }
         
         OnChangeItems.Invoke();
         return true;

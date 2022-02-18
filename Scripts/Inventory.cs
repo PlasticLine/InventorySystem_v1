@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class Inventory : MonoBehaviour
 {
     [Header("GRID")]
-    [Min(1)] public int Weight = 1;
-    [Min(1)] public int Height = 1;
+    [Min(1)] private int _weight = 1;
+    [Min(1)] private int _height = 1;
     [SerializeField] private ItemCell _itemCellPrefab;
 
     [Header("CELL")]
@@ -29,11 +29,11 @@ public class Inventory : MonoBehaviour
 
     private void InitCell()
     {
-        _data = new ItemCell[Weight, Height];
+        _data = new ItemCell[_weight, _height];
         float sizeCell = GetSizeCell();
 
-        for (int y = 0; y < Height; y++)
-        for (int x = 0; x < Weight; x++)
+        for (int y = 0; y < _height; y++)
+        for (int x = 0; x < _weight; x++)
         {
             ItemCell itemCell = Instantiate(_itemCellPrefab, GetWorldPosition(new Vector3(x, y)), Quaternion.identity, transform);
             itemCell.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeCell, sizeCell);
@@ -94,8 +94,8 @@ public class Inventory : MonoBehaviour
     
     public ItemCell GetNullCell()
     {
-        for (int y = Height-1; y >= 0; y--)
-        for (int x = 0; x < Weight; x++)
+        for (int y = _height-1; y >= 0; y--)
+        for (int x = 0; x < _weight; x++)
             if (!_data[x, y].Item)
                 return _data[x, y];
         return null;
@@ -139,7 +139,14 @@ public class Inventory : MonoBehaviour
 
     private Vector2 GetWorldPosition(Vector2 gridPosition)
         => (Vector2) transform.position + new Vector2(gridPosition.x, gridPosition.y);
+    
+    private float GetSizeCell()
+        => (_cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(2, 1))).x - 
+            _cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(1, 1))).x) - _indent;
 
+    public Vector2Int GetSzieGrid()
+        => new Vector2Int(_weight, _height);
+    
     #endregion
     
     #region Visual
@@ -147,16 +154,12 @@ public class Inventory : MonoBehaviour
     #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            for (int y = 0; y < Height; y++)
-            for (int x = 0; x < Weight; x++)
+            for (int y = 0; y < _height; y++)
+            for (int x = 0; x < _weight; x++)
                 Gizmos.DrawWireCube(GetWorldPosition(new Vector2(x, y)), Vector3.one);
         }
     #endif
 
-    private float GetSizeCell()
-        => (_cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(2, 1))).x - 
-            _cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(1, 1))).x) - _indent;
-    
     #endregion
     
 }

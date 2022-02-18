@@ -19,8 +19,10 @@ public class DebugInit : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(2))
         {
-            for (int y = 0; y < _inventory.Height; y++)
-            for (int x = 0; x < _inventory.Weight; x++)
+            Vector2Int sizeGrid = _inventory.GetSzieGrid();
+            
+            for (int y = 0; y < sizeGrid.y; y++)
+            for (int x = 0; x < sizeGrid.x; x++)
                 _inventory._data[x, y].SetBlock(false);
             
             _inventory.Clear();

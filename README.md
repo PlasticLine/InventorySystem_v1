@@ -3,6 +3,7 @@
 ###### Функции у Inventory.cs
 
 ```C#
+Inventory.RemoveItem(Item targetItem, int count = 1); // Удалить предмет (return bool) "true - успешно удалено false - возникли ошибки"
 Inventory.AddItem(Item targetItem, int count = 1); // Добавить предмет в инвентарь
 Inventory.Clear(); // Очистить инвентарь
 Inventory.GetNullCell(); // Найти свободную ячейку (return ItemCell)

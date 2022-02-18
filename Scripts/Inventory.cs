@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class Inventory : MonoBehaviour
 {
     [Header("GRID")]
-    [Min(1)] private int _weight = 1;
-    [Min(1)] private int _height = 1;
+    [SerializeField, Min(1)] private int _weight = 1;
+    [SerializeField, Min(1)] private int _height = 1;
     [SerializeField] private ItemCell _itemCellPrefab;
 
     [Header("CELL")]

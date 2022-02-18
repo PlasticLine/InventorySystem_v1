@@ -503,8 +503,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bfbc0c0fa20b904588a74330f952412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weight: 6
-  Height: 1
+  _weight: 6
+  _height: 1
   _itemCellPrefab: {fileID: 7859041202323356971, guid: 4e3ae66c77df478428f2ab663a12bbdc, type: 3}
   _indent: 3
   OnChangeItems:
@@ -560,8 +560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bfbc0c0fa20b904588a74330f952412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weight: 6
-  Height: 4
+  _weight: 6
+  _height: 4
   _itemCellPrefab: {fileID: 7859041202323356971, guid: 4e3ae66c77df478428f2ab663a12bbdc, type: 3}
   _indent: 3
   OnChangeItems:
@@ -582,7 +582,6 @@ MonoBehaviour:
   _isField: 1
   _isBlockRandom: 1
   _inventory: {fileID: 1600018439}
-  _cellPrefab: {fileID: 0}
   _items:
   - {fileID: 11400000, guid: 0c126a977f5464b4093aaed5a7d9ccc7, type: 2}
   - {fileID: 11400000, guid: 3766b6710004cda468f476191ef4a9e9, type: 2}

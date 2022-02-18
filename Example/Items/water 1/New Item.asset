@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df60bbef07e6e148b203135e5a3226f, type: 3}
   m_Name: New Item
   m_EditorClassIdentifier: 
-  TAG: water
+  TAG: water_big
   Title: "\u0412\u043E\u0434\u0438\u0447\u043A\u0430"
   Description: "\u041E\u0441\u0432\u0435\u0436\u0430\u0435\u0442"
   Icon: {fileID: 1453120599, guid: e504a6e32fe16d8469cf8602c622c464, type: 3}

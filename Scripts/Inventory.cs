@@ -6,12 +6,12 @@ using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
-    [Header("Grid")]
+    [Header("GRID")]
     [Min(1)] public int Weight = 1;
     [Min(1)] public int Height = 1;
     [SerializeField] private ItemCell _itemCellPrefab;
 
-    [Header("Size cell")] public bool IsBlock;
+    [Header("CELL")]
     [SerializeField, Min(0)] private float _indent = 3;
     
     [HideInInspector] public UnityEvent OnChangeItems;
@@ -35,10 +35,8 @@ public class Inventory : MonoBehaviour
         for (int y = 0; y < Height; y++)
         for (int x = 0; x < Weight; x++)
         {
-            Vector2 position = GetWorldPosition(new Vector3(x, y));
-            ItemCell itemCell = Instantiate(_itemCellPrefab, position, Quaternion.identity, transform);
+            ItemCell itemCell = Instantiate(_itemCellPrefab, GetWorldPosition(new Vector3(x, y)), Quaternion.identity, transform);
             itemCell.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeCell, sizeCell);
-            itemCell.SetBlock(IsBlock);
             _data[x, y] = itemCell;
         }
     }
@@ -93,6 +91,9 @@ public class Inventory : MonoBehaviour
         } while (currentCount > 0);
         OnChangeItems.Invoke();
     }
+
+    public ItemCell[,] GetData()
+        => _data;
     
     public ItemCell GetNullCell()
     {

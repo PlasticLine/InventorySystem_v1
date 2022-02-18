@@ -19,9 +19,9 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     [SerializeField] private GameObject _parentImageValue;
     [SerializeField] private TextMeshProUGUI _valueText;
     
-    [HideInInspector] public int Count;
     [HideInInspector] public Item Item;
-    [HideInInspector] public bool _isBlock;
+    [HideInInspector] public int Count { get; private set; }
+    [HideInInspector] public bool _isBlock { get; private set; }
 
     private RectTransform _rectTransform;
     private SpriteRenderer _dragImage;
@@ -137,7 +137,7 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
         if (!_dragImage)
         {
             _dragImage = new GameObject("DRAG ICON", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
-            _dragImage.sprite = Item.Icon;
+            if(Item) _dragImage.sprite = Item.Icon;
         }
     }
     

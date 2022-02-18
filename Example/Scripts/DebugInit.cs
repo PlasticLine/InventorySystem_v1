@@ -19,6 +19,10 @@ public class DebugInit : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(2))
         {
+            for (int y = 0; y < _inventory.Height; y++)
+            for (int x = 0; x < _inventory.Weight; x++)
+                _inventory._data[x, y].SetBlock(false);
+            
             _inventory.Clear();
             Init();
         }
@@ -35,7 +39,7 @@ public class DebugInit : MonoBehaviour
                 if (Random.value < .5f && _isBlockRandom)
                 {
                     Vector2Int index = new Vector2Int(Random.Range(0, _inventory.Weight), Random.Range(0, _inventory.Height));
-                    _inventory.GetData()[index.x, index.y].SetBlock(true);
+                    _inventory._data[index.x, index.y].SetBlock(true);
                 }
             }
         }

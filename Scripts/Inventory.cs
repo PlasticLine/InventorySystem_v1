@@ -16,9 +16,9 @@ public class Inventory : MonoBehaviour
     
     [HideInInspector] public UnityEvent OnChangeItems;
 
+    public ItemCell[,] _data { get; private set; }
     private Camera _cameraMain;
-    private ItemCell[,] _data;
-    
+
     #region Main
 
     private void Awake()
@@ -91,9 +91,6 @@ public class Inventory : MonoBehaviour
         } while (currentCount > 0);
         OnChangeItems.Invoke();
     }
-
-    public ItemCell[,] GetData()
-        => _data;
     
     public ItemCell GetNullCell()
     {

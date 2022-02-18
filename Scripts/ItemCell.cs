@@ -70,6 +70,8 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if(!_dragImage) return;
+        
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
 
@@ -130,14 +132,17 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     }
 
     public void OnDrag(PointerEventData eventData)
-        => _dragImage.transform.position = Camera.main.mousePosition();
+    {
+        if(_dragImage)
+            _dragImage.transform.position = Camera.main.mousePosition();
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!_dragImage)
+        if (!_dragImage && !_isBlock && Item)
         {
             _dragImage = new GameObject("DRAG ICON", typeof(SpriteRenderer)).GetComponent<SpriteRenderer>();
-            if(Item) _dragImage.sprite = Item.Icon;
+            _dragImage.sprite = Item.Icon;
         }
     }
     

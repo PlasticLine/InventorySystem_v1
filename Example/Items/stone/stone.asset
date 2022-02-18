@@ -16,5 +16,5 @@ MonoBehaviour:
   Title: "\u041A\u0430\u043C\u0435\u043D\u044C"
   Description: 
   Icon: {fileID: 21300000, guid: 8e0753085b7511b479f006b4dd18729d, type: 3}
-  Stack: 10
+  Stack: 64
   Inventory: {fileID: 0}

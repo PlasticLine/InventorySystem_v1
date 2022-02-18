@@ -45,6 +45,35 @@ public class Inventory : MonoBehaviour
 
     #region InteractionsItem
 
+    public bool RemoveItem(Item targetItem, int count = 1)
+    {
+        if (count <= 0) 
+            throw new IndexOutOfRangeException();
+        if (GetCountItem(targetItem) < count)
+            return false;
+
+        int currentCount = count;
+        do
+        {
+            List<ItemCell> itemCells = FindItems(targetItem);
+            foreach (var itemCell in itemCells)
+            {
+                if (itemCell.Count == targetItem.Stack && currentCount >= targetItem.Stack)
+                {
+                    itemCell.SetCount(0);
+                    currentCount -= targetItem.Stack;
+                }
+                else if (itemCell.Count == targetItem.Stack && currentCount < targetItem.Stack)
+                {
+                    itemCell.SetCount(itemCell.Count-currentCount);
+                    currentCount = 0;
+                }
+            }
+        } while (currentCount > 0);
+        
+        return true;
+    }
+    
     public void AddItem(Item target_item, int count = 1)
     {
         if (count <= 0) 

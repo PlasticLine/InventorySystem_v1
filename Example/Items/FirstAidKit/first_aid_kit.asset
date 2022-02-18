@@ -15,6 +15,6 @@ MonoBehaviour:
   TAG: first_aid_kit
   Title: "\u0410\u043F\u0442\u0435\u0447\u043A\u0430"
   Description: "\u041E\u0441\u0432\u0435\u0436\u0430\u0435\u0442"
-  Icon: {fileID: 21300000, guid: d703029d71333fa4a8eee9c5b07ddff7, type: 3}
+  Icon: {fileID: 21300000, guid: 64f80766a8c7619459996c37505888dc, type: 3}
   Stack: 2
   Inventory: {fileID: 0}

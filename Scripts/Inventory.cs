@@ -71,6 +71,7 @@ public class Inventory : MonoBehaviour
             }
         } while (currentCount > 0);
         
+        OnChangeItems.Invoke();
         return true;
     }
     

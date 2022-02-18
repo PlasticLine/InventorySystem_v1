@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,14 @@ public class Item : ScriptableObject
 {
     [Header("Settings")]
     public string TAG;
+    
+    [Header("UI")]
     public string Title;
-    [Multiline(3)] public string Description;
+    [Multiline(2)] public string Description;
     public Sprite Icon;
     
-    [Header("Stack")] 
+    [Header("Stack")]
     [Range(1, 64)] public int Stack = 1;
-    
+
     [HideInInspector] public Inventory Inventory;
 }

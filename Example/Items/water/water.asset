@@ -15,6 +15,6 @@ MonoBehaviour:
   TAG: water
   Title: "\u0412\u043E\u0434\u0438\u0447\u043A\u0430"
   Description: "\u041E\u0441\u0432\u0435\u0436\u0430\u0435\u0442"
-  Icon: {fileID: 1453120599, guid: e504a6e32fe16d8469cf8602c622c464, type: 3}
+  Icon: {fileID: 21300000, guid: e504a6e32fe16d8469cf8602c622c464, type: 3}
   Stack: 2
   Inventory: {fileID: 0}

@@ -16,6 +16,6 @@ MonoBehaviour:
   Title: "\u0421\u0443\u043F"
   Description: "\u041C\u0443\u0436\u043D\u043E \u0441\u043A\u0443\u0448\u0430\u0442\u044C,
     \u043F\u0440\u0435\u0431\u043E\u0432\u043B\u044F\u0435\u0442 \u0441\u044B\u0442\u043E\u0441\u0442\u044C"
-  Icon: {fileID: 21300000, guid: 65b7d1429fd57f84c99e784efeabd6b1, type: 3}
-  Stack: 4
+  Icon: {fileID: 21300000, guid: 151ecee210cb88149bcec41e60029427, type: 3}
+  Stack: 2
   Inventory: {fileID: 0}

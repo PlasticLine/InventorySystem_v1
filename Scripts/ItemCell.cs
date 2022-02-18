@@ -77,7 +77,7 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
 
         if(!_isBlock)
             foreach (var target in results)
-                if (target.gameObject.TryGetComponent(out ItemCell target_cell) && !target_cell._isBlock)
+                if (target.gameObject.TryGetComponent(out ItemCell target_cell) && target_cell != this && !target_cell._isBlock)
                 {
                     Item old_item = target_cell.Item;
                     int old_value = target_cell.Count;

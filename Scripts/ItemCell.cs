@@ -63,7 +63,7 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
         Count = 0;
         ReloadVisual();
     }
-
+    
     #endregion
     
     #region Events
@@ -96,6 +96,26 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
                         {
                             target_cell.SetItem(Item);
                             SetCount(Count - 1);
+                        }
+                    }
+                    else if (Input.GetMouseButtonUp(2) && Count >= 2) // Move half item
+                    {
+
+                        int halfCountOne = Count / 2;
+                        int halfCountTwo = Count - halfCountOne;
+
+                        if (target_cell.Item)
+                        {
+                            if (target_cell.Item.TAG == Item.TAG && target_cell.Count + halfCountOne <= target_cell.Item.Stack)
+                            {
+                                target_cell.SetCount(target_cell.Count + halfCountOne);
+                                SetCount(halfCountTwo);
+                            }
+                        }
+                        else
+                        {
+                            target_cell.SetItem(Item, halfCountOne);
+                            SetCount(halfCountTwo);
                         }
                     }
                     else // Move all item

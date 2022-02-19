@@ -17,7 +17,7 @@ public class DebugInit : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(2))
+        if (Input.GetMouseButtonDown(3))
         {
             Vector2Int sizeGrid = _inventory.GetSzieGrid();
             

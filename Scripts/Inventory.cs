@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using ConsoleSystem.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
+using Console = ConsoleSystem.Console;
 
 public class Inventory : MonoBehaviour
 {

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using ConsoleSystem.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,7 +11,9 @@ public class Inventory : MonoBehaviour
     [SerializeField, Min(1)] private int _height = 1;
     [SerializeField] private ItemCell _itemCellPrefab;
 
-    [Header("CELL")]
+    [Header("CELL")] 
+    [SerializeField, Min(.01f)] private float _weightCell = 1;
+    [SerializeField, Min(.01f)] private float _heightCell = 1;
     [SerializeField, Min(0)] private float _indent = 3;
     
     [HideInInspector] public UnityEvent OnChangeItems;
@@ -166,7 +167,7 @@ public class Inventory : MonoBehaviour
     #region OtherFunctions
 
     private Vector2 GetWorldPosition(Vector2 gridPosition)
-        => (Vector2) transform.position + new Vector2(gridPosition.x, gridPosition.y);
+        => (Vector2) transform.position + new Vector2(gridPosition.x * _weightCell, gridPosition.y * _heightCell);
     
     private float GetSizeCell()
         => (_cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(2, 1))).x - 
@@ -184,7 +185,7 @@ public class Inventory : MonoBehaviour
         {
             for (int y = 0; y < _height; y++)
             for (int x = 0; x < _weight; x++)
-                Gizmos.DrawWireCube(GetWorldPosition(new Vector2(x, y)), Vector3.one);
+                Gizmos.DrawWireCube(GetWorldPosition(new Vector2(x, y)), new Vector3(_weightCell, _heightCell));
         }
     #endif
 

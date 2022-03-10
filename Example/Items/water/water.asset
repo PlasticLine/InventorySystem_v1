@@ -17,4 +17,6 @@ MonoBehaviour:
   Description: "\u041E\u0441\u0432\u0435\u0436\u0430\u0435\u0442"
   Icon: {fileID: 21300000, guid: e504a6e32fe16d8469cf8602c622c464, type: 3}
   Stack: 5
+  Categories:
+  - {fileID: 11400000, guid: 18c8319d23de3434a9d98d3b881c7170, type: 2}
   Inventory: {fileID: 0}

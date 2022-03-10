@@ -6,16 +6,19 @@ using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
-    [Header("GRID")]
+    [Header("Grid")]
     [SerializeField, Min(1)] private int _weight = 1;
     [SerializeField, Min(1)] private int _height = 1;
     [SerializeField] private ItemCell _itemCellPrefab;
 
-    [Header("CELL")] 
+    [Header("Cell")] 
     [SerializeField, Min(.01f)] private float _weightCell = 1;
     [SerializeField, Min(.01f)] private float _heightCell = 1;
     [SerializeField, Min(0)] private float _indent = 3;
-    
+
+    [Header("Settings")] 
+    [SerializeField] public List<Category> _categories = new List<Category>();
+
     [HideInInspector] public UnityEvent OnChangeItems;
 
     public ItemCell[,] _data { get; private set; }
@@ -39,6 +42,7 @@ public class Inventory : MonoBehaviour
         {
             ItemCell itemCell = Instantiate(_itemCellPrefab, GetWorldPosition(new Vector3(x, y)), Quaternion.identity, transform);
             itemCell.GetComponent<RectTransform>().sizeDelta = new Vector2(sizeCell, sizeCell);
+            itemCell.Inventory = this;
             _data[x, y] = itemCell;
         }
     }
@@ -78,6 +82,8 @@ public class Inventory : MonoBehaviour
     {
         if (count <= 0) 
             throw new IndexOutOfRangeException();
+        if (!target_item.HasContainsCategories(_categories))
+            return;
 
         int currentCount = count;
         do

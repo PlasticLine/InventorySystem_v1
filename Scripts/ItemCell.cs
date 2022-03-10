@@ -20,12 +20,13 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     [SerializeField] private TextMeshProUGUI _valueText;
     
     [HideInInspector] public Item Item;
+    [HideInInspector] public Inventory Inventory;
     [HideInInspector] public int Count { get; private set; }
     [HideInInspector] public bool _isBlock { get; private set; }
 
     private RectTransform _rectTransform;
     private SpriteRenderer _dragImage;
-    
+
     #region Main
 
     private void Start()
@@ -77,7 +78,7 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
 
         if(!_isBlock)
             foreach (var target in results)
-                if (target.gameObject.TryGetComponent(out ItemCell target_cell) && target_cell != this && !target_cell._isBlock)
+                if (target.gameObject.TryGetComponent(out ItemCell target_cell) && target_cell != this && !target_cell._isBlock && Item.HasContainsCategories(target_cell.Inventory._categories))
                 {
                     Item old_item = target_cell.Item;
                     int old_value = target_cell.Count;

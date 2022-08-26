@@ -17,6 +17,12 @@ Inventory.GetAllItems(); // Получить все предметы котор�
 Inventory.GetSizeGrid(); // Получить размер сетки (return Vector2Int) "x - weight y - height"
 ```
 
+###### Функции у Item.cs
+```C#
+Item.SetMetaData(string key, string value); // Установить meta данные
+Item.GetMetaData(string key) => return string; // Получить meta данные
+```
+
 ###### Функции у ItemCell.cs
 
 ```C#

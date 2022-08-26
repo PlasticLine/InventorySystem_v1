@@ -95,7 +95,7 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     {
         if(!Item) return;
         string data = String.Empty;
-        foreach (var (key, value) in Item.GetAllMetaDatas())
+        foreach (var (key, value) in Item.GetMetaDatas())
             data += $"{key}: {value}\n";
         Vector3 worldPos = Camera.main.WorldToScreenPoint(transform.position);
         Rect rect = new Rect(new Vector2(worldPos.x, Screen.height-worldPos.y), new Vector2(100, data.Length*10));

@@ -58,7 +58,7 @@ public class Inventory : MonoBehaviour
         {
             if (whereCell.Item.TAG == fromCell.Item.TAG && whereCell.Count + count <= whereCell.Item.Stack)
             {
-                if(fromCell.Item.GetAllMetaDatas() != whereCell.Item.GetAllMetaDatas()) return;
+                if(fromCell.Item.GetMetaDatas() != whereCell.Item.GetMetaDatas()) return;
                 whereCell.SetCount(whereCell.Count + count);
                 fromCell.SetCount(fromCell.Count - count);
             }
@@ -79,7 +79,7 @@ public class Inventory : MonoBehaviour
         {
             if (whereCell.Item.TAG == fromCell.Item.TAG && whereCell.Count + halfCountOne <= whereCell.Item.Stack)
             {
-                if(fromCell.Item.GetAllMetaDatas() != whereCell.Item.GetAllMetaDatas()) return;
+                if(fromCell.Item.GetMetaDatas() != whereCell.Item.GetMetaDatas()) return;
                 whereCell.SetCount(whereCell.Count + halfCountOne);
                 fromCell.SetCount(halfCountTwo);
             }
@@ -122,7 +122,7 @@ public class Inventory : MonoBehaviour
     {
         Item old_targetItem = target_item;
         target_item = Instantiate(old_targetItem);
-        target_item.SetMetaDatas(PlasticLine.CloneDictionaryCloningValues(old_targetItem.GetAllMetaDatas())); 
+        target_item.SetMetaDatas(PlasticLine.CloneDictionaryCloningValues(old_targetItem.GetMetaDatas())); 
         
         if (count <= 0) 
             throw new IndexOutOfRangeException();

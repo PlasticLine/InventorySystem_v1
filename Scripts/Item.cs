@@ -36,7 +36,7 @@ public class Item : ScriptableObject
     public void SetMetaDatas(Dictionary<string, string> metaData)
         => _metaData = metaData;
     
-    public Dictionary<string, string> GetAllMetaDatas()
+    public Dictionary<string, string> GetMetaDatas()
         => _metaData;
 
     public bool HasContainsCategories(List<Category> targetCategories)

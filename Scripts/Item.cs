@@ -33,6 +33,9 @@ public class Item : ScriptableObject
             _metaData.Add(key, value);
     }
 
+    public void SetMetaDatas(Dictionary<string, string> metaData)
+        => _metaData = metaData;
+    
     public Dictionary<string, string> GetAllMetaDatas()
         => _metaData;
 

@@ -120,6 +120,10 @@ public class Inventory : MonoBehaviour
     
     public void AddItem(Item target_item, int count = 1)
     {
+        Item old_targetItem = target_item;
+        target_item = Instantiate(old_targetItem);
+        target_item.SetMetaDatas(PlasticLine.CloneDictionaryCloningValues(old_targetItem.GetAllMetaDatas())); 
+        
         if (count <= 0) 
             throw new IndexOutOfRangeException();
         if (!target_item.HasContainsCategories(_categories))

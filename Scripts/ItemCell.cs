@@ -12,8 +12,8 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     [SerializeField] private Sprite _nullReferenceSprite;
     
     [Header("Reference")]
-    [SerializeField] private Image _icon;
-    [SerializeField] private Animator _animator;
+    public Image Icon;
+    public Animator Animator;
 
     [Header("VALUE")]
     [SerializeField] private GameObject _parentImageValue;
@@ -21,8 +21,9 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     
     [HideInInspector] public Item Item;
     [HideInInspector] public Inventory Inventory;
-    [HideInInspector] public int Count { get; private set; }
-    [HideInInspector] public bool _isBlock { get; private set; }
+    
+    public int Count { get; private set; }
+    public bool _isBlock { get; private set; }
 
     private RectTransform _rectTransform;
     private SpriteRenderer _dragImage;
@@ -107,7 +108,7 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     }
     
     public void OnPointerEnter(PointerEventData eventData)
-        => _animator.Play("PointEnter");
+        => Animator.Play("PointEnter");
 
     #endregion
 
@@ -116,7 +117,7 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     public void ReloadVisual()
     {
         _blockCellObject.SetActive(_isBlock);
-        _icon.sprite = Item && Item.Icon ? Item.Icon : _nullReferenceSprite;
+        Icon.sprite = Item && Item.Icon ? Item.Icon : _nullReferenceSprite;
         _valueText.text = $"x{Count.ToString()}";
         _parentImageValue.SetActive(Count > 1);
 

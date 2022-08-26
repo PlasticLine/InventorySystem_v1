@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 616168778094125543}
   - component: {fileID: 8919256715115969274}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -324,7 +324,7 @@ RectTransform:
   - {fileID: 5408942334194142662}
   - {fileID: 3341613049291432492}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -383,13 +383,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blockCellObject: {fileID: 7042815350795980547}
   _nullReferenceSprite: {fileID: 21300000, guid: f7861fcf19260ff44bb8c6fc162826ea, type: 3}
-  _icon: {fileID: 8919256715115969274}
-  _animator: {fileID: 5521031056400878748}
+  Icon: {fileID: 8919256715115969274}
+  Animator: {fileID: 5521031056400878748}
   _parentImageValue: {fileID: 5913252052766505650}
   _valueText: {fileID: 9041876655129835932}
-  Count: 0
   Item: {fileID: 0}
-  _isBlock: 0
+  Inventory: {fileID: 0}
 --- !u!95 &5521031056400878748
 Animator:
   serializedVersion: 4

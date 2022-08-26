@@ -235,7 +235,7 @@ public class Inventory : MonoBehaviour
     private Vector2 GetWorldPosition(Vector2 gridPosition)
         => (Vector2) transform.position + new Vector2(gridPosition.x * _weightCell, gridPosition.y * _heightCell);
     
-    private float GetSizeCell()
+    public float GetSizeCell()
         => (_cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(2, 1))).x - 
             _cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(1, 1))).x) - _indent;
 

@@ -24,6 +24,8 @@ public class Item : ScriptableObject
     [HideInInspector] public Inventory Inventory;
     private Dictionary<string, string> _metaData = new Dictionary<string, string>();
 
+    #region MetaData
+
     public string GetMetaData(string key)
         => _metaData.TryGetValue(key, out string value) ? value : null;
 
@@ -38,6 +40,11 @@ public class Item : ScriptableObject
     
     public Dictionary<string, string> GetMetaDatas()
         => _metaData;
+
+    public bool HasMetaData(string key)
+        => _metaData.ContainsKey(key);
+
+    #endregion
 
     public bool HasContainsCategories(List<Category> targetCategories)
     {

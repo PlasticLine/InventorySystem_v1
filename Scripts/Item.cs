@@ -22,6 +22,13 @@ public class Item : ScriptableObject
     public List<Category> Categories = new List<Category>();
 
     [HideInInspector] public Inventory Inventory;
+    private Dictionary<string, string> _metaData = new Dictionary<string, string>();
+
+    public string GetMetaData(string key)
+        => _metaData.TryGetValue(key, out string value) ? value : null;
+
+    public void SetMetaData(string key, string value)
+        => _metaData.Add(key, value);
     
     public bool HasContainsCategories(List<Category> targetCategories)
     {

@@ -1,6 +1,6 @@
 # InventorySystem
 
-###### Функции у Inventory.cs
+### Функции у Inventory.cs
 
 ```C#
 // Ивенты
@@ -23,7 +23,7 @@ Inventory.ItemDragCount(ItemCell fromCell, ItemCell whereCell, int count = 1); /
 Inventory.ItemDragSplitter(ItemCell fromCell, ItemCell whereCell, float splitter = 1); // Перемещает разделенный предмет
 ```
 
-###### Функции у Item.cs
+### Функции у Item.cs
 ```C#
 Item.SetMetaData(string key, string value); // Установить meta данные
 Item.GetMetaData(string key) => return string; // Получить meta данные
@@ -31,7 +31,7 @@ Item.GetMetaDatas() => return Dictionary<string, string>; // Получить в
 Item.SetMetaDatas(Dictionary<string, string> metaData); // Установить список мета данных
 ```
 
-###### Функции у ItemCell.cs
+### Функции у ItemCell.cs
 
 ```C#
 ItemCell.SetCount(int count = 1); // Установить кол-во предметов

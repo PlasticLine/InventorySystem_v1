@@ -91,17 +91,6 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
         Destroy(_dragImage.gameObject);
     }
 
-    private void OnGUI()
-    {
-        if(!Item) return;
-        string data = String.Empty;
-        foreach (var (key, value) in Item.GetMetaDatas())
-            data += $"{key}: {value}\n";
-        Vector3 worldPos = Camera.main.WorldToScreenPoint(transform.position);
-        Rect rect = new Rect(new Vector2(worldPos.x, Screen.height-worldPos.y), new Vector2(100, data.Length*10));
-        GUI.Label(rect, data);
-    }
-
     public void OnDrag(PointerEventData eventData)
     {
         if(_dragImage)

@@ -15,6 +15,7 @@ Inventory.FindItems(Item targetItem); // Найти определенный п�
 Inventory.GetCountItem(Item targetItem); // Получить кол-во определенных предметов (return int)
 Inventory.GetAllItems(); // Получить все предметы которые лежат в инвенторе (return List<ItemCell>)
 Inventory.GetSizeGrid(); // Получить размер сетки (return Vector2Int) "x - weight y - height"
+Inventory.MetadataComparison(Item oneMetaData, Item twoMetaData) return bool; // Проверка на совместимость мета данных
 
 // Перемещение
 Inventory.ItemDragCount(ItemCell fromCell, ItemCell whereCell, int count = 1); // Перемещает определенное кол-во предметов за раз

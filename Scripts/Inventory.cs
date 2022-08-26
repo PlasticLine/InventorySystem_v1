@@ -58,7 +58,7 @@ public class Inventory : MonoBehaviour
         {
             if (whereCell.Item.TAG == fromCell.Item.TAG && whereCell.Count + count <= whereCell.Item.Stack)
             {
-                if(fromCell.Item.GetMetaDatas() != whereCell.Item.GetMetaDatas()) return;
+                if(!MetadataComparison(fromCell.Item, whereCell.Item)) return;
                 whereCell.SetCount(whereCell.Count + count);
                 fromCell.SetCount(fromCell.Count - count);
             }
@@ -79,7 +79,7 @@ public class Inventory : MonoBehaviour
         {
             if (whereCell.Item.TAG == fromCell.Item.TAG && whereCell.Count + halfCountOne <= whereCell.Item.Stack)
             {
-                if(fromCell.Item.GetMetaDatas() != whereCell.Item.GetMetaDatas()) return;
+                if(!MetadataComparison(fromCell.Item, whereCell.Item)) return;
                 whereCell.SetCount(whereCell.Count + halfCountOne);
                 fromCell.SetCount(halfCountTwo);
             }
@@ -189,6 +189,22 @@ public class Inventory : MonoBehaviour
         return items;
     }
 
+    public bool MetadataComparison(Item oneMetaData, Item twoMetaData)
+    {
+        if (oneMetaData.GetMetaDatas().Count == twoMetaData.GetMetaDatas().Count)
+        {
+            foreach (var (key, value) in oneMetaData.GetMetaDatas())
+                if (twoMetaData.GetMetaDatas().ContainsKey(key) && twoMetaData.GetMetaDatas().ContainsValue(value))
+                {
+                    
+                }
+                else return false;
+        }
+        else return false;
+
+        return true;
+    }
+    
     public List<ItemCell> GetAllItems()
     {
         List<ItemCell> items = new List<ItemCell>();

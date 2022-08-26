@@ -28,8 +28,14 @@ public class Item : ScriptableObject
         => _metaData.TryGetValue(key, out string value) ? value : null;
 
     public void SetMetaData(string key, string value)
-        => _metaData.Add(key, value);
-    
+    {
+        if(!_metaData.ContainsKey(key)) 
+            _metaData.Add(key, value);
+    }
+
+    public Dictionary<string, string> GetAllMetaDatas()
+        => _metaData;
+
     public bool HasContainsCategories(List<Category> targetCategories)
     {
         if (targetCategories == null)

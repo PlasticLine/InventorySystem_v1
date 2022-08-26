@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,6 +10,7 @@ public class DebugInit : MonoBehaviour
     [SerializeField] private bool _isRemove;
     [SerializeField] private bool _isField;
     [SerializeField] private bool _isBlockRandom;
+    [SerializeField] private bool _isMetaDataRandom;
     [SerializeField] private Inventory _inventory;
     [SerializeField] private List<Item> _items = new List<Item>();
 
@@ -52,6 +54,13 @@ public class DebugInit : MonoBehaviour
                     _inventory._data[index.x, index.y].SetBlock(true);
                 }
             }
+        }
+
+        foreach (var itemCell in _inventory.GetAllItems())
+        {
+            if(itemCell.Item)
+                if(Random.value < 0.5f)
+                    itemCell.Item.SetMetaData($"Проверка-{Random.value*3400}", (Random.value*500).ToString(CultureInfo.InvariantCulture));
         }
     }
 }

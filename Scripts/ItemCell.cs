@@ -80,76 +80,26 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
             foreach (var target in results)
                 if (target.gameObject.TryGetComponent(out ItemCell target_cell) && target_cell != this && !target_cell._isBlock && Item.HasContainsCategories(target_cell.Inventory._categories))
                 {
-                    Item old_item = target_cell.Item;
-                    int old_value = target_cell.Count;
-
-                    if (Input.GetMouseButtonUp(1) && Count >= 2) // Move one item
-                    {
-                        if (target_cell.Item)
-                        {
-                            if (target_cell.Item.TAG == Item.TAG && target_cell.Count + 1 <= target_cell.Item.Stack)
-                            {
-                                target_cell.SetCount(target_cell.Count + 1);
-                                SetCount(Count - 1);
-                            }
-                        }
-                        else
-                        {
-                            target_cell.SetItem(Item);
-                            SetCount(Count - 1);
-                        }
-                    }
-                    else if (Input.GetMouseButtonUp(2) && Count >= 2) // Move half item
-                    {
-
-                        int halfCountOne = Count / 2;
-                        int halfCountTwo = Count - halfCountOne;
-
-                        if (target_cell.Item)
-                        {
-                            if (target_cell.Item.TAG == Item.TAG && target_cell.Count + halfCountOne <= target_cell.Item.Stack)
-                            {
-                                target_cell.SetCount(target_cell.Count + halfCountOne);
-                                SetCount(halfCountTwo);
-                            }
-                        }
-                        else
-                        {
-                            target_cell.SetItem(Item, halfCountOne);
-                            SetCount(halfCountTwo);
-                        }
-                    }
+                    if (Input.GetMouseButtonUp(1)) // Move one item
+                        Inventory.ItemDragCount(this, target_cell, 1);
+                    else if (Input.GetMouseButtonUp(2)) // Move half item
+                        Inventory.ItemDragSplitter(this,target_cell, 0.5f);
                     else // Move all item
-                    {
-                        if (target_cell.Item && target_cell.Item.TAG == Item.TAG &&
-                            target_cell.Count < target_cell.Item.Stack)
-                        {
-                            if (target_cell.Count + Count <= target_cell.Item.Stack)
-                            {
-                                target_cell.SetCount(target_cell.Count + Count);
-                                DeleteItem();
-                            }
-                            else
-                            {
-                                int lack = target_cell.Item.Stack - target_cell.Count;
-                                if (lack > 0 && Count >= lack)
-                                {
-                                    target_cell.SetCount(target_cell.Count + lack);
-                                    SetCount(Count - lack);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            target_cell.SetItem(Item, Count);
-                            SetItem(old_item, old_value);
-                        }
-                    }
-
+                        Inventory.ItemDragSplitter(this, target_cell);
                     target_cell.ReloadVisual();
                 }
-        
         Destroy(_dragImage.gameObject);
+    }
+
+    private void OnGUI()
+    {
+        if(!Item) return;
+        string data = String.Empty;
+        foreach (var (key, value) in Item.GetAllMetaDatas())
+            data += $"{key}: {value}\n";
+        Vector3 worldPos = Camera.main.WorldToScreenPoint(transform.position);
+        Rect rect = new Rect(new Vector2(worldPos.x, Screen.height-worldPos.y), new Vector2(100, data.Length*10));
+        GUI.Label(rect, data);
     }
 
     public void OnDrag(PointerEventData eventData)

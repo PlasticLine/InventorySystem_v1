@@ -51,6 +51,46 @@ public class Inventory : MonoBehaviour
 
     #region InteractionsItem
 
+    public void ItemDragCount(ItemCell fromCell, ItemCell whereCell, int count = 1)
+    {
+        if(fromCell.Count < count) return;
+        if (whereCell.Item)
+        {
+            if (whereCell.Item.TAG == fromCell.Item.TAG && whereCell.Count + count <= whereCell.Item.Stack)
+            {
+                if(fromCell.Item.GetAllMetaDatas() != whereCell.Item.GetAllMetaDatas()) return;
+                whereCell.SetCount(whereCell.Count + count);
+                fromCell.SetCount(fromCell.Count - count);
+            }
+        }
+        else
+        {
+            whereCell.SetItem(fromCell.Item);
+            fromCell.SetCount(fromCell.Count - count);
+        }
+    }
+    
+    public void ItemDragSplitter(ItemCell fromCell, ItemCell whereCell, float splitter = 1)
+    {
+        int halfCountOne = Mathf.RoundToInt(fromCell.Count * splitter);
+        int halfCountTwo = fromCell.Count - halfCountOne;
+
+        if (whereCell.Item)
+        {
+            if (whereCell.Item.TAG == fromCell.Item.TAG && whereCell.Count + halfCountOne <= whereCell.Item.Stack)
+            {
+                if(fromCell.Item.GetAllMetaDatas() != whereCell.Item.GetAllMetaDatas()) return;
+                whereCell.SetCount(whereCell.Count + halfCountOne);
+                fromCell.SetCount(halfCountTwo);
+            }
+        }
+        else
+        {
+            whereCell.SetItem(fromCell.Item, halfCountOne);
+            fromCell.SetCount(halfCountTwo);
+        }
+    }
+    
     public bool RemoveItem(Item targetItem, int count = 1)
     {
         if (count <= 0) 

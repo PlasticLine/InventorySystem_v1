@@ -51,6 +51,46 @@ public class Inventory : MonoBehaviour
 
     #region InteractionsItem
 
+    public void ItemDragCount(ItemCell fromCell, ItemCell whereCell, int count = 1)
+    {
+        if(fromCell.Count < count) return;
+        if (whereCell.Item)
+        {
+            if (whereCell.Item.TAG == fromCell.Item.TAG && whereCell.Count + count <= whereCell.Item.Stack)
+            {
+                if(!MetadataComparison(fromCell.Item, whereCell.Item)) return;
+                whereCell.SetCount(whereCell.Count + count);
+                fromCell.SetCount(fromCell.Count - count);
+            }
+        }
+        else
+        {
+            whereCell.SetItem(fromCell.Item);
+            fromCell.SetCount(fromCell.Count - count);
+        }
+    }
+    
+    public void ItemDragSplitter(ItemCell fromCell, ItemCell whereCell, float splitter = 1)
+    {
+        int halfCountOne = Mathf.RoundToInt(fromCell.Count * splitter);
+        int halfCountTwo = fromCell.Count - halfCountOne;
+
+        if (whereCell.Item)
+        {
+            if (whereCell.Item.TAG == fromCell.Item.TAG && whereCell.Count + halfCountOne <= whereCell.Item.Stack)
+            {
+                if(!MetadataComparison(fromCell.Item, whereCell.Item)) return;
+                whereCell.SetCount(whereCell.Count + halfCountOne);
+                fromCell.SetCount(halfCountTwo);
+            }
+        }
+        else
+        {
+            whereCell.SetItem(fromCell.Item, halfCountOne);
+            fromCell.SetCount(halfCountTwo);
+        }
+    }
+    
     public bool RemoveItem(Item targetItem, int count = 1)
     {
         if (count <= 0) 
@@ -80,6 +120,10 @@ public class Inventory : MonoBehaviour
     
     public void AddItem(Item target_item, int count = 1)
     {
+        Item old_targetItem = target_item;
+        target_item = Instantiate(old_targetItem);
+        target_item.SetMetaDatas(PlasticLine.CloneDictionaryCloningValues(old_targetItem.GetMetaDatas())); 
+        
         if (count <= 0) 
             throw new IndexOutOfRangeException();
         if (!target_item.HasContainsCategories(_categories))
@@ -145,6 +189,22 @@ public class Inventory : MonoBehaviour
         return items;
     }
 
+    public bool MetadataComparison(Item oneMetaData, Item twoMetaData)
+    {
+        if (oneMetaData.GetMetaDatas().Count == twoMetaData.GetMetaDatas().Count)
+        {
+            foreach (var (key, value) in oneMetaData.GetMetaDatas())
+                if (twoMetaData.GetMetaDatas().ContainsKey(key) && twoMetaData.GetMetaDatas().ContainsValue(value))
+                {
+                    
+                }
+                else return false;
+        }
+        else return false;
+
+        return true;
+    }
+    
     public List<ItemCell> GetAllItems()
     {
         List<ItemCell> items = new List<ItemCell>();
@@ -175,7 +235,7 @@ public class Inventory : MonoBehaviour
     private Vector2 GetWorldPosition(Vector2 gridPosition)
         => (Vector2) transform.position + new Vector2(gridPosition.x * _weightCell, gridPosition.y * _heightCell);
     
-    private float GetSizeCell()
+    public float GetSizeCell()
         => (_cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(2, 1))).x - 
             _cameraMain.WorldToScreenPoint( GetWorldPosition(new Vector3(1, 1))).x) - _indent;
 

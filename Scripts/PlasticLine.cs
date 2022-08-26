@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEngine.EventSystems;
 
 public static class PlasticLine
 {
-
     public static T Random<T>(this List<T> items)
         => items[UnityEngine.Random.Range(0, items.Count)];
     
@@ -27,5 +27,15 @@ public static class PlasticLine
         EventTrigger.Entry entry = new EventTrigger.Entry(){ eventID = type };
         entry.callback.AddListener(action.Invoke);
         trigger.triggers.Add(entry);
+    }
+    
+    public static Dictionary<TKey, TValue> CloneDictionaryCloningValues<TKey, TValue>
+        (Dictionary<TKey, TValue> original) where TValue : ICloneable
+    {
+        Dictionary<TKey, TValue> ret = new Dictionary<TKey, TValue>(original.Count,
+            original.Comparer);
+        foreach (KeyValuePair<TKey, TValue> entry in original)
+            ret.Add(entry.Key, (TValue) entry.Value.Clone());
+        return ret;
     }
 }

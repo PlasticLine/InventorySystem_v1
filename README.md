@@ -7,14 +7,15 @@
 Inventory.OnChangeItems(); // Вызывается когда меняется кол-во предметов
 
 // Функции 
-Inventory.RemoveItem(Item targetItem, int count = 1); // Удалить предмет (return bool) "true - успешно удалено false - возникли ошибки"
+Inventory.RemoveItem(Item targetItem, int count = 1) return bool; // Удалить предмет
 Inventory.AddItem(Item targetItem, int count = 1); // Добавить предмет в инвентарь
 Inventory.Clear(); // Очистить инвентарь
-Inventory.GetNullCell(); // Найти свободную ячейку (return ItemCell)
-Inventory.FindItems(Item targetItem); // Найти определенный предмет (return List<ItemCell>)
-Inventory.GetCountItem(Item targetItem); // Получить кол-во определенных предметов (return int)
-Inventory.GetAllItems(); // Получить все предметы которые лежат в инвенторе (return List<ItemCell>)
-Inventory.GetSizeGrid(); // Получить размер сетки (return Vector2Int) "x - weight y - height"
+Inventory.GetNullCell() return ItemCell; // Найти свободную ячейку
+Inventory.FindItems(Item targetItem) return List<ItemCell>; // Найти определенный предмет
+Inventory.GetCountItem(Item targetItem) return int; // Получить кол-во определенных предметов
+Inventory.GetAllItems() return List<ItemCell>; // Получить все предметы которые лежат в инвенторе
+Inventory.GetSizeGrid() return Vector2Int; // Получить размер сетки
+Inventory.GetSizeCell() return float; // Вернет размер ячейки
 Inventory.MetadataComparison(Item oneMetaData, Item twoMetaData) return bool; // Проверка на совместимость мета данных
 
 // Перемещение

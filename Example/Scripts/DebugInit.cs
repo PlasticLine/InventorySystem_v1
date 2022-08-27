@@ -36,7 +36,7 @@ public class DebugInit : MonoBehaviour
         {
             Item item = _items.Random();
             int countRemove = Random.Range(1, item.Stack + 1);
-            Debug.Log($"Remove: x{countRemove} {item.Title} | Status: {_inventory.RemoveItem(item, countRemove)}");
+            Debug.Log($"Remove: x{countRemove} {item.Title} | Status: {_inventory.RemoveItem(item, countRemove, false)}");
         }
     }
 

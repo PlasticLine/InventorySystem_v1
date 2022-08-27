@@ -200,6 +200,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -305,6 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 266629273}
   - component: {fileID: 266629274}
+  - component: {fileID: 266629275}
   m_Layer: 5
   m_Name: Small-Inventory (1)
   m_TagString: Untagged
@@ -355,6 +357,30 @@ MonoBehaviour:
   OnChangeItems:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &266629275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266629272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a932c6fc6551d4eb3fe4373a4a957e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRemove: 0
+  _isField: 1
+  _isBlockRandom: 0
+  _isMetaDataRandom: 1
+  _inventory: {fileID: 266629274}
+  _items:
+  - {fileID: 11400000, guid: 0c126a977f5464b4093aaed5a7d9ccc7, type: 2}
+  - {fileID: 11400000, guid: 3766b6710004cda468f476191ef4a9e9, type: 2}
+  - {fileID: 11400000, guid: e9328bf3dcb37c64597fff2c5c157f46, type: 2}
+  - {fileID: 11400000, guid: a4634552699005c40832c5270fe432a8, type: 2}
+  - {fileID: 11400000, guid: d737ec2107e1a094594f1557ce92780d, type: 2}
+  - {fileID: 11400000, guid: a2b519898eac2aa43b614aaea834315d, type: 2}
 --- !u!1 &344966053
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +762,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 105.600006, y: -152}
+  m_AnchoredPosition: {x: 56.000004, y: -202}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1192293680
@@ -754,8 +780,8 @@ MonoBehaviour:
   _weight: 6
   _height: 1
   _itemCellPrefab: {fileID: 7859041202323356971, guid: 4e3ae66c77df478428f2ab663a12bbdc, type: 3}
-  _weightCell: 1
-  _heightCell: 1
+  _weightCell: 1.5
+  _heightCell: 1.5
   _indent: 3
   _categories: []
   OnChangeItems:
@@ -1201,7 +1227,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 102.600006, y: -6}
+  m_AnchoredPosition: {x: 53, y: -56}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1600018439
@@ -1219,8 +1245,8 @@ MonoBehaviour:
   _weight: 6
   _height: 4
   _itemCellPrefab: {fileID: 7859041202323356971, guid: 4e3ae66c77df478428f2ab663a12bbdc, type: 3}
-  _weightCell: 1
-  _heightCell: 1
+  _weightCell: 1.5
+  _heightCell: 1.5
   _indent: 3
   _categories: []
   OnChangeItems:
@@ -1241,6 +1267,7 @@ MonoBehaviour:
   _isRemove: 1
   _isField: 1
   _isBlockRandom: 1
+  _isMetaDataRandom: 0
   _inventory: {fileID: 1600018439}
   _items:
   - {fileID: 11400000, guid: 0c126a977f5464b4093aaed5a7d9ccc7, type: 2}

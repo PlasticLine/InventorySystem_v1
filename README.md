@@ -5,13 +5,15 @@
 ```C#
 // Ивенты
 Inventory.OnChangeItems(); // Вызывается когда меняется кол-во предметов
+Inventory.OnClickCell(ItemCell); // Вызывается при нажатии на ячейку
+Inventory.OnEnterCell(ItemCell); // Вызывается когда навели на ячейку
 
 // Функции 
-Inventory.RemoveItem(Item targetItem, int count = 1) return bool; // Удалить предмет
+Inventory.RemoveItem(Item targetItem, int count = 1, bool useMetaData = true) return bool; // Удалить предмет
 Inventory.AddItem(Item targetItem, int count = 1); // Добавить предмет в инвентарь
 Inventory.Clear(); // Очистить инвентарь
 Inventory.GetNullCell() return ItemCell; // Найти свободную ячейку
-Inventory.FindItems(Item targetItem) return List<ItemCell>; // Найти определенный предмет
+Inventory.FindItems(Item targetItem, bool useMetaData = true) return List<ItemCell>; // Найти определенный предмет
 Inventory.GetCountItem(Item targetItem) return int; // Получить кол-во определенных предметов
 Inventory.GetAllItems() return List<ItemCell>; // Получить все предметы которые лежат в инвенторе
 Inventory.GetSizeGrid() return Vector2Int; // Получить размер сетки
@@ -25,10 +27,11 @@ Inventory.ItemDragSplitter(ItemCell fromCell, ItemCell whereCell, float splitter
 
 ### Функции у Item.cs
 ```C#
-Item.SetMetaData(string key, string value); // Установить meta данные
-Item.GetMetaData(string key) => return string; // Получить meta данные
+Item.SetMetaData(string key, string value); // Установить мета данные
+Item.GetMetaData(string key) => return string; // Получить мета данные
 Item.GetMetaDatas() => return Dictionary<string, string>; // Получить весь список мета данных предмета
 Item.SetMetaDatas(Dictionary<string, string> metaData); // Установить список мета данных
+Item.DeleteMetaData(string key); // Удалить мета данные
 ```
 
 ### Функции у ItemCell.cs

@@ -20,6 +20,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] public List<Category> _categories = new List<Category>();
 
     [HideInInspector] public UnityEvent OnChangeItems;
+    [HideInInspector] public EventItemCell OnClickCell;
+    [HideInInspector] public EventItemCell OnEnterCell;
 
     public ItemCell[,] _data { get; private set; }
     private Camera _cameraMain;
@@ -91,7 +93,7 @@ public class Inventory : MonoBehaviour
         }
     }
     
-    public bool RemoveItem(Item targetItem, int count = 1)
+    public bool RemoveItem(Item targetItem, int count = 1, bool useMetaData = true)
     {
         if (count <= 0) 
             throw new IndexOutOfRangeException();
@@ -99,7 +101,7 @@ public class Inventory : MonoBehaviour
             return false;
 
         int currentCount = count;
-        List<ItemCell> itemCells = FindItems(targetItem);
+        List<ItemCell> itemCells = FindItems(targetItem, useMetaData);
         foreach (var itemCell in itemCells)
         {
             if (itemCell.Count <= currentCount)
@@ -180,12 +182,17 @@ public class Inventory : MonoBehaviour
         return null;
     }
     
-    public List<ItemCell> FindItems(Item target)
+    public List<ItemCell> FindItems(Item target, bool useMetaData = true)
     {
         List<ItemCell> items = new List<ItemCell>();
         foreach (var item in _data)
             if (item.Item && item.Item.TAG == target.TAG)
-                items.Add(item);
+                if(useMetaData)
+                {
+                    if(MetadataComparison(item.Item, target))
+                        items.Add(item);
+                }
+                else items.Add(item);
         return items;
     }
 
@@ -258,3 +265,5 @@ public class Inventory : MonoBehaviour
     #endregion
     
 }
+
+[Serializable] public class EventItemCell : UnityEvent<ItemCell> {}

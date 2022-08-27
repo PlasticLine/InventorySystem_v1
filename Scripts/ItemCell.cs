@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEnterHandler, IBeginDragHandler
+public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEnterHandler, IBeginDragHandler, IPointerClickHandler
 {
     [Header("Reference sprites")] 
     [SerializeField] private GameObject _blockCellObject;
@@ -108,7 +108,13 @@ public class ItemCell : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerEn
     }
     
     public void OnPointerEnter(PointerEventData eventData)
-        => Animator.Play("PointEnter");
+    {
+        Animator.Play("PointEnter");
+        Inventory.OnEnterCell.Invoke(this);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+        => Inventory.OnClickCell.Invoke(this);
 
     #endregion
 

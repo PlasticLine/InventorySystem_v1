@@ -31,10 +31,18 @@ public class Item : ScriptableObject
 
     public void SetMetaData(string key, string value)
     {
-        if(!_metaData.ContainsKey(key)) 
+        if (!HasMetaData(key))
             _metaData.Add(key, value);
+        else
+            _metaData[key] = value;
     }
 
+    public void DeleteMetaData(string key)
+    {
+        if (HasMetaData(key))
+            _metaData.Remove(key);
+    }
+    
     public void SetMetaDatas(Dictionary<string, string> metaData)
         => _metaData = metaData;
     

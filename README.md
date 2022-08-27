@@ -5,7 +5,7 @@
 ```C#
 // Ивенты
 Inventory.OnChangeItems(); // Вызывается когда меняется кол-во предметов
-Inventory.OnClickCell(ItemCell); // Вызывается при нажатии на ячейку
+Inventory.OnClickCell(ItemCell); // Вызывается при нажатии на ячейку (Не вызывается когда происходит Drag)
 Inventory.OnEnterCell(ItemCell); // Вызывается когда навели на ячейку
 
 // Функции 

@@ -16,7 +16,22 @@ public class DebugInit : MonoBehaviour
     [SerializeField] private List<Item> _items = new List<Item>();
 
     private void Start()
-        => Init();
+    {
+        _inventory.OnClickCell.AddListener((itemCell =>
+        {
+            if (itemCell.Item)
+            {
+                Item item = itemCell.Item;
+
+                string metadata = String.Empty;
+                foreach (var (key, value) in item.GetMetaDatas())
+                    metadata += $"{key}: {value}\n";
+                
+                Debug.Log($"Предмет: {item.Title}\nОписание {item.Description}\nМета данные: {metadata}\n\n");
+            }
+        }));
+        Init();
+    }
 
     private void Update()
     {

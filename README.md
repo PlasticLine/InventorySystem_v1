@@ -28,8 +28,9 @@ Inventory.ItemDragSplitter(ItemCell fromCell, ItemCell whereCell, float splitter
 ### Функции у Item.cs
 ```C#
 Item.SetMetaData(string key, string value); // Установить мета данные
-Item.GetMetaData(string key) => return string; // Получить мета данные
-Item.GetMetaDatas() => return Dictionary<string, string>; // Получить весь список мета данных предмета
+Item.GetMetaData(string key) return string; // Получить мета данные
+Item.HasMetaData(string key) return bool; // Проверить существует ли мета данная под данным ключем
+Item.GetMetaDatas() return Dictionary<string, string>; // Получить весь список мета данных предмета
 Item.SetMetaDatas(Dictionary<string, string> metaData); // Установить список мета данных
 Item.DeleteMetaData(string key); // Удалить мета данные
 ```

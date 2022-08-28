@@ -53,17 +53,29 @@ public class Inventory : MonoBehaviour
 
     #region InteractionsItem
 
+    public void SwapItemPlace(ItemCell fromCell, ItemCell whereCell)
+    {
+        if (!fromCell.Item || !whereCell.Item) return;
+        if(!fromCell.Item.HasContainsCategories(whereCell.Inventory._categories) || !whereCell.Item.HasContainsCategories(fromCell.Inventory._categories)) return;
+
+        Item fromItem = fromCell.Item;
+        int fromCount = fromCell.Count;
+
+        fromCell.SetItem(whereCell.Item, whereCell.Count);
+        whereCell.SetItem(fromItem, fromCount);
+    }
+    
     public void ItemDragCount(ItemCell fromCell, ItemCell whereCell, int count = 1)
     {
         if(fromCell.Count < count) return;
         if (whereCell.Item)
         {
-            if (whereCell.Item.TAG == fromCell.Item.TAG && whereCell.Count + count <= whereCell.Item.Stack)
+            if (whereCell.Item.TAG == fromCell.Item.TAG && MetadataComparison(fromCell.Item, whereCell.Item) && whereCell.Count + count <= whereCell.Item.Stack)
             {
-                if(!MetadataComparison(fromCell.Item, whereCell.Item)) return;
                 whereCell.SetCount(whereCell.Count + count);
                 fromCell.SetCount(fromCell.Count - count);
             }
+            else SwapItemPlace(fromCell, whereCell);
         }
         else
         {
@@ -79,12 +91,12 @@ public class Inventory : MonoBehaviour
 
         if (whereCell.Item)
         {
-            if (whereCell.Item.TAG == fromCell.Item.TAG && whereCell.Count + halfCountOne <= whereCell.Item.Stack)
+            if (whereCell.Item.TAG == fromCell.Item.TAG && MetadataComparison(fromCell.Item, whereCell.Item) && whereCell.Count + halfCountOne <= whereCell.Item.Stack)
             {
-                if(!MetadataComparison(fromCell.Item, whereCell.Item)) return;
                 whereCell.SetCount(whereCell.Count + halfCountOne);
                 fromCell.SetCount(halfCountTwo);
             }
+            else SwapItemPlace(fromCell, whereCell);
         }
         else
         {

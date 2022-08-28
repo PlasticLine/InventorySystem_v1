@@ -27,6 +27,10 @@ Inventory.ItemDragSplitter(ItemCell fromCell, ItemCell whereCell, float splitter
 
 ### Функции у Item.cs
 ```C#
+//Функции
+Item.HasContainsCategories(List<Category> targetCategories) return bool; // Проверить содержание категории в предмете
+
+// Мета данные
 Item.SetMetaData(string key, string value); // Установить мета данные
 Item.GetMetaData(string key) return string; // Получить мета данные
 Item.HasMetaData(string key) return bool; // Проверить существует ли мета данная под данным ключем

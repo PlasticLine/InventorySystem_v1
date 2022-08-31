@@ -1,5 +1,7 @@
 # InventorySystem
 
+![image](https://user-images.githubusercontent.com/56786730/187758444-6f0c7736-c393-4ccb-9397-f9c31c63ac03.png)
+
 Простая система для создания инвенторя для вашей игры.
 
 ### Функции у Inventory.cs

@@ -1,6 +1,7 @@
 # InventorySystem
 
 ![image](https://user-images.githubusercontent.com/56786730/187758444-6f0c7736-c393-4ccb-9397-f9c31c63ac03.png)
+![image](https://user-images.githubusercontent.com/56786730/187760489-8e145e0a-e4ff-445c-bfa6-6dc2d7bd2618.png)
 
 Простая система для создания инвенторя для вашей игры.
 

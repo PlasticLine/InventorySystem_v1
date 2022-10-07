@@ -5,7 +5,7 @@
 
 Простая система для создания инвенторя для вашей игры.
 
-### Функции у Inventory.cs
+### Функции у `Inventory.cs`
 
 ```C#
 // Ивенты
@@ -30,7 +30,7 @@ Inventory.ItemDragCount(ItemCell fromCell, ItemCell whereCell, int count = 1); /
 Inventory.ItemDragSplitter(ItemCell fromCell, ItemCell whereCell, float splitter = 1); // Перемещает разделенный предмет
 ```
 
-### Функции у Item.cs
+### Функции у `Item.cs`
 ```C#
 //Функции
 Item.HasContainsCategories(List<Category> targetCategories) return bool; // Проверить содержание категории в предмете
@@ -44,7 +44,7 @@ Item.SetMetaDatas(Dictionary<string, string> metaData); // Установить 
 Item.DeleteMetaData(string key); // Удалить мета данные
 ```
 
-### Функции у ItemCell.cs
+### Функции у `ItemCell.cs`
 
 ```C#
 ItemCell.SetCount(int count = 1); // Установить кол-во предметов

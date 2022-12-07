@@ -5,6 +5,8 @@
 
 Простая система для создания инвенторя для вашей игры.
 
+## Новая версия инвенторя (v2): https://github.com/PlasticLine/InventorySystem_v2
+
 ### Функции у `Inventory.cs`
 
 ```C#
